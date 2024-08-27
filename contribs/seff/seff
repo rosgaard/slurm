@@ -63,7 +63,8 @@ my $job = @$jobs[0];
 #print Dumper($job);
 
 my $jobid = $job->{'jobid'};
-my $user = $job->{'user'};
+my $uid = $job->{'uid'};
+my $user = `id -un $uid | tr -d '\n'`;
 my $group = getgrgid($job->{'gid'});
 my $state = $slurm->job_state_string($job->{'state'});
 $clustername = $job->{'cluster'};
